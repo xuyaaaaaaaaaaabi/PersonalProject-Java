@@ -24,47 +24,44 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.com.countF;
 import com.com.judgeF;
+import com.com.basic;
 
 
 public class func {
 
 	private static BufferedReader br;
 
-	static Map<String,Integer> mapp = new TreeMap<String,Integer>();
-	static String outPath;
-	private static int sumC = 0;//用于统计字符数
-	private static int sumW = 0;//用于统计单词数
-	private static int sumR = 0;//用于统计有效行数
-	private static int numN = 0;//统计\n个数
+	public static Map<String,Integer> mapp = new TreeMap<String,Integer>();
+	public static String outPath;//输出文件位置
+	public static String uri;//输入文件位置
+	public static int sumC = 0;//用于统计字符数
+	public static int sumW = 0;//用于统计单词数
+	public static int sumR = 0;//用于统计有效行数
+	public static int numN = 0;//统计\n个数
 
 	public static void readFile() throws IOException {
 		
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("请输入文件路径：(例如C:\\text.txt)");
-			String uri = scanner.next();
-			System.out.println("请输入输出路径：(例如C:\\text.txt,不建议同一路径)");
-			outPath = scanner.next();
-			
-			
+			basic.scanIn();
 			FileInputStream fis = new FileInputStream(uri);
 			InputStreamReader isr =new InputStreamReader(fis);
 			br = new BufferedReader(isr);
+			
 			String s;
 			while((s=br.readLine()) != null){
-				sumC += countF.countCh(s);
-				s = s.replaceAll(" +", " ");
-				s = s.replaceAll("\t+","");
-				String[] s1 =s.split(" ");
 				
+				sumC += countF.countCh(s);
+				s = basic.removeSpaces(s);
+		
+				String[] s1 =s.split(" ");	
 				if(s1.length>0)
 				{
-					if(!s1[0].equals(""))
+					if(basic.haveEnter(s1))
 						sumR++;
 					numN++;
 				}
 				if(mapp.isEmpty())
 				{//当map当中单词数量为0时候，将内容比对重复并塞进去
-					mapp.putAll(inLineFirst(s1));
+					mapp.putAll(countF.inLineFirst(s1));
 				}
 				else
 				{//map当中已经有过单词了，需要比对重复单词，并将数量合并
@@ -108,42 +105,7 @@ public class func {
 			
 		}
 
-	}
 	
-	public static HashMap<String,Integer> inLineFirst(String[] s) {
-		//将传入的字符串数组排序，并返还一个合并好的map数组
-		//统计单词总数
-		
-		HashMap<String,Integer> m = new HashMap<>();
-		Arrays.sort(s);
-		for(int i=0;i<s.length;i++)
-			s[i] = s[i].toLowerCase();
-		
-		
-		for(int i=0;i<s.length;i++)
-		{
-			int count=1;
-			//判断是否为单词
-			if(judgeF.isWord(s[i])) {
-				//是单词
-				sumW++;
-				while(i+count<s.length)
-				{
-					if(s[i].equals(s[i+count]))
-					{
-						count++;
-						sumW++;
-					}
-					else
-						break;
-				}
-				m.put(s[i], count);
-				i = i + count - 1;
-			}
-			
-		}
-		return m;
-	}
 	
 	public static void add(String[] s)
 	{
@@ -151,7 +113,7 @@ public class func {
 		
 		//转换map
 		HashMap<String,Integer> m = new HashMap<>();
-		m.putAll(inLineFirst(s));
+		m.putAll(countF.inLineFirst(s));
 
 			
 		
