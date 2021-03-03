@@ -22,6 +22,9 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.com.countF;
+import com.com.judgeF;
+
 
 public class func {
 
@@ -48,9 +51,7 @@ public class func {
 			br = new BufferedReader(isr);
 			String s;
 			while((s=br.readLine()) != null){
-				sumC+=s.length();
-//				s = s.replace("\t|\n|\f|\r","1123");
-//				System.out.println(s);
+				sumC += countF.countCh(s);
 				s = s.replaceAll(" +", " ");
 				s = s.replaceAll("\t+","");
 				String[] s1 =s.split(" ");
@@ -123,7 +124,7 @@ public class func {
 		{
 			int count=1;
 			//判断是否为单词
-			if(isWord(s[i])) {
+			if(judgeF.isWord(s[i])) {
 				//是单词
 				sumW++;
 				while(i+count<s.length)
@@ -170,56 +171,16 @@ public class func {
 	}
 	
 	
-	public static boolean isWord(String a)
-	{
-		//判断是否为单词
-		if(a.length()<4)
-			return false;//字符数小于4
-		
-		String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
-		Pattern p=Pattern.compile(regEx);
-		Matcher m=p.matcher(a);
-		
-		if(m.find())
-			return false;//包含特殊字符
-		
-		if(Character.isDigit(a.charAt(0)))
-			return false;//以数字开头不是
-		
-		if(Character.isLowerCase(a.charAt(a.length()-1))||Character.isUpperCase(a.charAt(a.length()-1)))
-			return false;//以字母结尾不是
-		
-		for(int i=1;i<3;i++)
-		{
-			if (Character.isLowerCase(a.charAt(i))||Character.isUpperCase(a.charAt(i)))
-			{
-			    continue;  
-			}
-			else
-				return false;//至少前四位数都是字母
-		}
-		
-		if(Character.isDigit(a.charAt(a.length()-1)))
-			return true;//满足以上条件且最后一位是数字，就是单词
-		else
-			return false;//常理走不到这里，但是需要满足函数规范
-	}
-	
-	
 	
 	public static void print()
 	{
 		//打印输出
 		int a = 0;
-//		System.out.println("characters:"+sumC);
-//		System.out.println("words:"+sumW);
-//		System.out.println("lines:"+sumR);
 		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(mapp.entrySet());
 
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
 		    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      
 		        return (o2.getValue() - o1.getValue()); 
-		        //return (o1.getKey()).toString().compareTo(o2.getKey());
 		    }
 		}); 
 		
@@ -247,21 +208,6 @@ public class func {
 		}
 		System.out.println("打印完成！");
 		
-//		for (int i = 0; i < infoIds.size(); i++) {
-//			a++;
-//		    String id = infoIds.get(i).toString();
-//		    String[] str = id.split("=");
-//		    System.out.print(str[0]+":"+str[1]+"\n");
-//		    if(a==10)
-//		    	break;
-//		}
-		
-//		for (String key : mapp.keySet()) {
-//			a++;
-//			System.out.println(key + "	" + mapp.get(key));
-//			if(a==10)
-//				break;
-//        }
 	}
 	
 
