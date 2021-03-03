@@ -1,12 +1,12 @@
 package com.com;
 
-import java.awt.List;
-import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -29,6 +28,7 @@ public class func {
 	private static BufferedReader br;
 
 	static Map<String,Integer> mapp = new TreeMap<String,Integer>();
+	static String outPath;
 	private static int sumC = 0;//用于统计字符数
 	private static int sumW = 0;//用于统计单词数
 	private static int sumR = 0;//用于统计有效行数
@@ -37,8 +37,11 @@ public class func {
 	public static void readFile() throws IOException {
 		
 		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("请输入路径：(例如C:\text.txt)");
+			System.out.println("请输入文件路径：(例如C:\\text.txt)");
 			String uri = scanner.next();
+			System.out.println("请输入输出路径：(例如C:\\text.txt,不建议同一路径)");
+			outPath = scanner.next();
+			
 			
 			FileInputStream fis = new FileInputStream(uri);
 			InputStreamReader isr =new InputStreamReader(fis);
@@ -67,6 +70,9 @@ public class func {
 					add(s1);
 				}
 			}
+			fis.close();
+			isr.close();
+			br.close();
 			
 			
 			
@@ -88,9 +94,13 @@ public class func {
 	            char[] c = a.toCharArray();
 	            if(c[0] == '\n'||c[0]=='\r')
 	            	numN++;
+	            
+	            channel.close();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        
+	        
 			sumC+=numN*2;
 			//打印输出
 			print();
@@ -201,9 +211,9 @@ public class func {
 	{
 		//打印输出
 		int a = 0;
-		System.out.println("characters:"+sumC);
-		System.out.println("words:"+sumW);
-		System.out.println("lines:"+sumR);
+//		System.out.println("characters:"+sumC);
+//		System.out.println("words:"+sumW);
+//		System.out.println("lines:"+sumR);
 		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(mapp.entrySet());
 
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
@@ -213,14 +223,38 @@ public class func {
 		    }
 		}); 
 		
-		for (int i = 0; i < infoIds.size(); i++) {
-			a++;
-		    String id = infoIds.get(i).toString();
-		    String[] str = id.split("=");
-		    System.out.print(str[0]+":"+str[1]+"\n");
-		    if(a==10)
-		    	break;
+		
+		
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(outPath));
+			out.println("characters: "+sumC);
+			out.println("words: "+sumW);
+			out.println("lines: "+sumR);
+			for (int i = 0; i < infoIds.size(); i++) 
+			{
+				a++;
+			    String id = infoIds.get(i).toString();
+			    String[] str = id.split("=");
+			    out.print(str[0]+": "+str[1]+"\n");
+			    if(a==10)
+			    	break;
+			}
+				out.close();//关闭文件.
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("打印完成！");
+		
+//		for (int i = 0; i < infoIds.size(); i++) {
+//			a++;
+//		    String id = infoIds.get(i).toString();
+//		    String[] str = id.split("=");
+//		    System.out.print(str[0]+":"+str[1]+"\n");
+//		    if(a==10)
+//		    	break;
+//		}
 		
 //		for (String key : mapp.keySet()) {
 //			a++;
