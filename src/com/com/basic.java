@@ -1,5 +1,9 @@
 package com.com;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class basic {
@@ -34,10 +38,10 @@ public class basic {
 	public static String removeSpaces(String str)
 	{
 		str = str.replaceAll(" +", " ");
-		str = str.replaceAll("\t+"," ");
-		str = str.replaceAll("\0+"," ");
-		str = str.replaceAll("\b+"," ");
-		str = str.replaceAll("\f+"," ");
+		str = str.replaceAll("\t+","");
+		str = str.replaceAll("\0+","");
+		str = str.replaceAll("\b+","");
+		str = str.replaceAll("\f+","");
 		return str;
 	}
 	
@@ -45,8 +49,40 @@ public class basic {
 	public static boolean haveEnter(String[] s)
 	{
 		if(!s[0].equals(""))
-			return true;
-		return false;
+			return false;
+		return true;
+	}
+	
+	//4.打印输出
+	public static void print()
+	{
+		int a = 0;
+		ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(func.outPath));
+			out.println("characters: "+func.sumC);
+			out.println("words: "+func.sumW);
+			out.println("lines: "+func.sumR);
+			System.out.println("characters: "+func.sumC);
+			System.out.println("words: "+func.sumW);
+			System.out.println("lines: "+func.sumR);
+			for (int i = 0; i < infoIds.size(); i++) 
+			{
+				a++;
+			    String id = infoIds.get(i).toString();
+			    String[] str = id.split("=");
+			    out.print(str[0]+": "+str[1]+"\n");
+			    System.out.print(str[0]+": "+str[1]+"\n");
+			    if(a==10)
+			    	break;
+			}
+				out.close();//关闭文件.
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("打印完成！");
 	}
 	
 	
