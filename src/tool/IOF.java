@@ -1,4 +1,4 @@
-package com.com;
+package tool;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -14,6 +14,10 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Map;
 
+import workFunc.working_set;
+
+import basic.basic;
+
 public class IOF {
 	
 	/**
@@ -26,17 +30,17 @@ public class IOF {
 	public static void fileRead(){
 		BufferedReader br;
 		try {
-			FileInputStream fis = new FileInputStream(func.uri);
+			FileInputStream fis = new FileInputStream(working_set.inPath);
 			InputStreamReader isr =new InputStreamReader(fis);
 			br = new BufferedReader(isr);
 			String s;
 			while((s=br.readLine()) != null) {
-				func.sumC += countF.countCh(s);
+				working_set.sumC += countF.countCh(s);
 				s = basic.removeSpaces(s);
 				String[] s1 =s.split(" ");
 				countF.countR(s1);
-				if(func.mapp.isEmpty())//当map当中单词数量为0时候，将内容比对重复并塞进去
-					func.mapp.putAll(countF.inLineFirst(s1));
+				if(working_set.wordSet.isEmpty())//当map当中单词数量为0时候，将内容比对重复并塞进去
+					working_set.wordSet.putAll(countF.inLineFirst(s1));
 				else//map当中已经有过单词了，需要比对重复单词，并将数量合并
 					countF.addInMap(s1);
 			}
@@ -50,7 +54,7 @@ public class IOF {
 	
 	//检测最后一行是否有换行
 	public static boolean hasEnterLasdtLine(){
-		Path logPath = Paths.get(func.uri);
+		Path logPath = Paths.get(working_set.inPath);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         try {
             // 创建FileChannel并打开文件通道以进行读取访问。
@@ -74,14 +78,14 @@ public class IOF {
 		int a = 0;
 		PrintWriter out = null;
 		ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
-		System.out.println("characters: "+func.sumC);
-		System.out.println("words: "+func.sumW);
-		System.out.println("lines: "+func.sumR);
+		System.out.println("characters: "+working_set.sumC);
+		System.out.println("words: "+working_set.sumW);
+		System.out.println("lines: "+working_set.sumR);
 		try {
-			out = new PrintWriter(new FileWriter(func.outPath));
-			out.println("characters: "+func.sumC);
-			out.println("words: "+func.sumW);
-			out.println("lines: "+func.sumR);		
+			out = new PrintWriter(new FileWriter(working_set.outPath));
+			out.println("characters: "+working_set.sumC);
+			out.println("words: "+working_set.sumW);
+			out.println("lines: "+working_set.sumR);		
 
 		}
 		catch(Exception e){
