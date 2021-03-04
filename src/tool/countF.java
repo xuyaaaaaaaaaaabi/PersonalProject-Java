@@ -1,4 +1,4 @@
-package com.com;
+package tool;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.com.func;
+import workFunc.working_set;
 
 public class countF {	
 	/**
@@ -34,8 +34,8 @@ public class countF {
 	public static void countR(String[] s1){
 		if(s1.length>0){
 			if(!s1[0].equals(""))
-				func.sumR++;
-			func.numN++;
+				working_set.sumR++;
+			working_set.numN++;
 		}
 	}
 
@@ -52,12 +52,12 @@ public class countF {
 			int count=1;
 			//判断是否为单词
 			if(judgeF.isWord(s[i])) {
-				func.sumW++;
+				working_set.sumW++;
 				while(i+count<s.length)
 				{
 					if(s[i].equals(s[i+count])) {
 						count++;
-						func.sumW++;
+						working_set.sumW++;
 					}
 					else
 						break;
@@ -78,14 +78,14 @@ public class countF {
 
 		//统计，相同合并，不同加入
 		for (String key : m.keySet()) {
-			if(func.mapp.containsKey(key)){
-				int or = func.mapp.get(key);
+			if(working_set.wordSet.containsKey(key)){
+				int or = working_set.wordSet.get(key);
 				int now = m.get(key);
 				int n = or+now;
-				func.mapp.put(key, n);
+				working_set.wordSet.put(key, n);
 	        }
 	        else{
-	            func.mapp.put(key, m.get(key));
+	        	working_set.wordSet.put(key, m.get(key));
 	        }
 	    }
 	}
@@ -94,7 +94,7 @@ public class countF {
 	//词频前十的单词（排序）
 	public static ArrayList<Map.Entry<String, Integer>> sortMap(){
 		//创建一个list用于存储map当中的内容
-		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(func.mapp.entrySet());
+		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(working_set.wordSet.entrySet());
 		//创建比较器
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
 			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      

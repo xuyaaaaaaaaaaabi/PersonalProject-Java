@@ -1,6 +1,8 @@
-package com.com;
+package basic;
 
 import java.util.Scanner;
+
+import workFunc.working_set;
 
 public class basic {
 
@@ -19,9 +21,9 @@ public class basic {
 	public static void scanIn(){
 		try (Scanner scanner = new Scanner(System.in)) {
 			System.out.println("请输入文本路径：(例如C:\\text.txt)");
-			func.uri = scanner.next();
+			working_set.inPath = scanner.next();
 			System.out.println("请输入文本路径：(例如C:\\text.txt不建议相同路径)");
-			func.outPath = scanner.next();
+			working_set.outPath = scanner.next();
 		}catch(Exception e){
 			System.out.print(e);
 		}
