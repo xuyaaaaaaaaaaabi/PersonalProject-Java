@@ -28,6 +28,12 @@ public class countF {
 	{
 		return str.length();
 	}
+	public static int allCh(int a,int n)
+	{
+		return a+2*n;
+	}
+	
+	
 	
 	//统计行数
 	public static void countR(String[] s1)
