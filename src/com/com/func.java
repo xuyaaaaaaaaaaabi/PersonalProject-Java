@@ -29,12 +29,8 @@ public class func {
 		 * 单词:至少四位的以数字结尾，字母开头的，由字母数字组成的
 		 */
 			basic.scanIn();
-			try{
-				//文件读入
-				IOF.fileRead();
-			}catch(Exception e) {
-				System.out.println(e);
-			}
+			//文件读入
+			IOF.fileRead();
 			//最后一行是否有换行符或回车
 			if(IOF.hasEnterLasdtLine())
 				numN++;
