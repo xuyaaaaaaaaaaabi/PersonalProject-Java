@@ -1,5 +1,3 @@
-package com.com;
-
 import java.io.IOException;
 import workFunc.working_set;
 
