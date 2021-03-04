@@ -24,10 +24,8 @@ public class IOF {
 	 * 
 	 */
 	//文件读入
-	public static void fileRead() throws IOException
-	{
+	public static void fileRead() throws IOException{
 		BufferedReader br;
-		
 		FileInputStream fis = new FileInputStream(func.uri);
 		InputStreamReader isr =new InputStreamReader(fis);
 		br = new BufferedReader(isr);
@@ -39,14 +37,10 @@ public class IOF {
 			
 			countF.countR(s1);
 						
-			if(func.mapp.isEmpty())
-			{//当map当中单词数量为0时候，将内容比对重复并塞进去
+			if(func.mapp.isEmpty())//当map当中单词数量为0时候，将内容比对重复并塞进去
 				func.mapp.putAll(countF.inLineFirst(s1));
-			}
-			else
-			{//map当中已经有过单词了，需要比对重复单词，并将数量合并
+			else//map当中已经有过单词了，需要比对重复单词，并将数量合并
 				countF.addInMap(s1);
-			}
 		}
 		fis.close();
 		isr.close();
@@ -55,11 +49,9 @@ public class IOF {
 	
 	
 	//检测最后一行是否有换行
-	public static boolean hasEnterLasdtLine()
-	{
+	public static boolean hasEnterLasdtLine(){
 		Path logPath = Paths.get(func.uri);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
-
         try {
             // 创建FileChannel并打开文件通道以进行读取访问。
             FileChannel channel = FileChannel.open(logPath, StandardOpenOption.READ);
@@ -68,7 +60,6 @@ public class IOF {
             char[] c = a.toCharArray();
             if(c[0] == '\n'||c[0]=='\r')
             	return true;
-            
             channel.close();
             return false;
         } catch (IOException e) {
@@ -77,40 +68,34 @@ public class IOF {
         }
 	}
 	
-	
-	
-	
-	
-	
 	//打印输出
-		public static void print()
-		{
-			int a = 0;
-			ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
-			try {
-				PrintWriter out = new PrintWriter(new FileWriter(func.outPath));
-				out.println("characters: "+func.sumC);
-				out.println("words: "+func.sumW);
-				out.println("lines: "+func.sumR);
-				System.out.println("characters: "+func.sumC);
-				System.out.println("words: "+func.sumW);
-				System.out.println("lines: "+func.sumR);
-				for (int i = 0; i < infoIds.size(); i++) 
-				{
-					a++;
-				    String id = infoIds.get(i).toString();
-				    String[] str = id.split("=");
-				    out.print(str[0]+": "+str[1]+"\n");
-				    System.out.print(str[0]+": "+str[1]+"\n");
-				    if(a==10)
-				    	break;
-				}
-					out.close();//关闭文件.
+	public static void print()
+	{
+		int a = 0;
+		ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(func.outPath));
+			out.println("characters: "+func.sumC);
+			out.println("words: "+func.sumW);
+			out.println("lines: "+func.sumR);
+			System.out.println("characters: "+func.sumC);
+			System.out.println("words: "+func.sumW);
+			System.out.println("lines: "+func.sumR);
+			for (int i = 0; i < infoIds.size(); i++) {
+				a++;
+				String id = infoIds.get(i).toString();
+				String[] str = id.split("=");
+				out.print(str[0]+": "+str[1]+"\n");
+				System.out.print(str[0]+": "+str[1]+"\n");
+				if(a==10)
+					break;
 			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			System.out.println("打印完成！");
+			out.close();//关闭文件.
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("打印完成！");
+	}
+	
 }
