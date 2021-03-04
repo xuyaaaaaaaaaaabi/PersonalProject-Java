@@ -48,7 +48,8 @@ public class IOF {
 			isr.close();
 			br.close();
 		}catch(Exception e) {
-			System.out.println(e);
+			working_set.openFileFalse = true;
+			System.out.println("文件可能不存在哦，请检查后重试");
 		}
 	}
 	
@@ -67,7 +68,7 @@ public class IOF {
             channel.close();
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+        	working_set.openFileFalse = true;
             return false;
         }
 	}
@@ -75,42 +76,42 @@ public class IOF {
 	//打印输出
 	public static void print()
 	{
-		int a = 0;
-		PrintWriter out = null;
-		ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
-		System.out.println("characters: "+working_set.sumC);
-		System.out.println("words: "+working_set.sumW);
-		System.out.println("lines: "+working_set.sumR);
-		try {
-			out = new PrintWriter(new FileWriter(working_set.outPath));
-			out.println("characters: "+working_set.sumC);
-			out.println("words: "+working_set.sumW);
-			out.println("lines: "+working_set.sumR);		
-
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		for (int i = 0; i < infoIds.size(); i++) {
-			a++;
-			String id = infoIds.get(i).toString();
-			String[] str = id.split("=");
+		if(!working_set.openFileFalse) {
+			int a = 0;
+			PrintWriter out = null;
+			ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
 			try {
-				out.print(str[0]+": "+str[1]+"\n");
-			}catch(Exception e) {
-				e.printStackTrace();
+				System.out.println("characters: "+working_set.sumC);
+				System.out.println("words: "+working_set.sumW);
+				System.out.println("lines: "+working_set.sumR);
+				out = new PrintWriter(new FileWriter(working_set.outPath));
+				out.println("characters: "+working_set.sumC);
+				out.println("words: "+working_set.sumW);
+				out.println("lines: "+working_set.sumR);		
 			}
-			System.out.print(str[0]+": "+str[1]+"\n");
-			if(a==10)
-				break;
+			catch(Exception e){
+				System.out.println("输出失败了");
+			}
+			for (int i = 0; i < infoIds.size(); i++) {
+				a++;
+				String id = infoIds.get(i).toString();
+				String[] str = id.split("=");
+				try {
+					out.print(str[0]+": "+str[1]+"\n");
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				System.out.print(str[0]+": "+str[1]+"\n");
+				if(a==10)
+					break;
+			}
+			try {
+				out.close();//关闭文件.
+				System.out.println("结果已打印到指定文件中，请查看");
+			}catch(Exception e) {
+				System.out.println("文件输出失败了,QAQ再试试吧");
+			}
 		}
-		try {
-			out.close();//关闭文件.
-			System.out.println("打印完成！");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
 	}
 
 }

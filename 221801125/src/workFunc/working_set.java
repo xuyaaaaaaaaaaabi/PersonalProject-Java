@@ -19,6 +19,7 @@ public class working_set {
 	public static int sumW = 0;//用于统计单词数
 	public static int sumR = 0;//用于统计有效行数
 	public static int numN = 0;//统计\n个数
+	public static boolean openFileFalse = false;
 	
 	//其他函数所需变量
 
@@ -29,7 +30,7 @@ public class working_set {
 		 * 统计排名前十的单词数量
 		 * 单词:至少四位的以数字结尾，字母开头的，由字母数字组成的
 		 */
-			basic.scanIn();
+//			basic.scanIn();
 			//文件读入
 			IOF.fileRead();
 			//最后一行是否有换行符或回车

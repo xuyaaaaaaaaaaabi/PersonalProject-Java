@@ -1,5 +1,6 @@
 package basic;
 
+import java.io.File;
 import java.util.Scanner;
 
 import workFunc.working_set;
@@ -22,10 +23,12 @@ public class basic {
 		try (Scanner scanner = new Scanner(System.in)) {
 			System.out.println("请输入文本路径：(例如C:\\text.txt)");
 			working_set.inPath = scanner.next();
+			working_set.inPath = new File(working_set.inPath).getAbsolutePath();
 			System.out.println("请输入文本路径：(例如C:\\text.txt不建议相同路径)");
 			working_set.outPath = scanner.next();
+			working_set.outPath = new File(working_set.outPath).getAbsolutePath();
 		}catch(Exception e){
-			System.out.print(e);
+			System.out.println("啊哦，输入失败了，请重新开启");
 		}
 	}
 	
