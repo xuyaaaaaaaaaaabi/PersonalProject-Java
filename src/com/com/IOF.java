@@ -23,11 +23,7 @@ public class IOF {
 	 * 
 	 */
 	//文件读入
-<<<<<<< HEAD
-	public static void fileRead() throws IOException {
-=======
 	public static void fileRead() throws IOException{
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 		BufferedReader br;
 		FileInputStream fis = new FileInputStream(func.uri);
 		InputStreamReader isr =new InputStreamReader(fis);
@@ -38,10 +34,6 @@ public class IOF {
 			s = basic.removeSpaces(s);
 			String[] s1 =s.split(" ");
 			countF.countR(s1);
-<<<<<<< HEAD
-=======
-						
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 			if(func.mapp.isEmpty())//当map当中单词数量为0时候，将内容比对重复并塞进去
 				func.mapp.putAll(countF.inLineFirst(s1));
 			else//map当中已经有过单词了，需要比对重复单词，并将数量合并
@@ -53,11 +45,7 @@ public class IOF {
 	}
 	
 	//检测最后一行是否有换行
-<<<<<<< HEAD
-	public static boolean hasEnterLasdtLine() {
-=======
 	public static boolean hasEnterLasdtLine(){
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 		Path logPath = Paths.get(func.uri);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         try {
@@ -77,12 +65,8 @@ public class IOF {
 	}
 	
 	//打印输出
-<<<<<<< HEAD
-	public static void print() {
-=======
 	public static void print()
 	{
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 		int a = 0;
 		ArrayList<Map.Entry<String, Integer>> infoIds = countF.sortMap();
 		try {
@@ -103,19 +87,11 @@ public class IOF {
 					break;
 			}
 			out.close();//关闭文件.
-<<<<<<< HEAD
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("打印完成！");
-	}
-=======
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 		System.out.println("打印完成！");
 	}
-	
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
+
 }

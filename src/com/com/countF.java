@@ -10,11 +10,7 @@ import java.util.TreeMap;
 
 import com.com.func;
 
-<<<<<<< HEAD
-public class countF {
-=======
 public class countF {	
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 	/**
 	 * 
 	 * 作为计数的核心代码
@@ -27,28 +23,16 @@ public class countF {
 	 */
 	
 	//用于返回字符数
-<<<<<<< HEAD
-	public static int countCh(String str) {
-		return str.length();
-	}
-	public static int allCh(int a,int n) {
-=======
 	public static int countCh(String str){
 		return str.length();
 	}
 	public static int allCh(int a,int n){
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 		return a+2*n;
 	}
 	
 	//统计行数
-<<<<<<< HEAD
-	public static void countR(String[] s1) {
-		if(s1.length>0) {
-=======
 	public static void countR(String[] s1){
 		if(s1.length>0){
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 			if(!s1[0].equals(""))
 				func.sumR++;
 			func.numN++;
@@ -61,30 +45,17 @@ public class countF {
 		//统计单词总数
 		HashMap<String,Integer> m = new HashMap<>();
 		Arrays.sort(s);
-<<<<<<< HEAD
-		//将所有单词的大写改成小写
-		for(int i=0;i<s.length;i++)
-			s[i] = s[i].toLowerCase();
-		for(int i=0;i<s.length;i++) {
-			int count = 1;
-=======
 		//将每一个数字都转为小写
 		for(int i=0;i<s.length;i++)
 			s[i] = s[i].toLowerCase();
 		for(int i=0;i<s.length;i++){
 			int count=1;
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 			//判断是否为单词
 			if(judgeF.isWord(s[i])) {
 				func.sumW++;
-<<<<<<< HEAD
 				while(i+count<s.length)
 				{
 					if(s[i].equals(s[i+count])) {
-=======
-				while(i+count<s.length){
-					if(s[i].equals(s[i+count])){
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 						count++;
 						func.sumW++;
 					}
@@ -99,31 +70,6 @@ public class countF {
 	}
 	
 	//其余行map处理
-<<<<<<< HEAD
-	public static void addInMap(String[] s) {
-	//将传入字符串数组先转换为map，再同原来的大map合并		
-	//转换map
-		Map<String,Integer> m = new TreeMap<String,Integer>();
-		m.putAll(countF.inLineFirst(s));			
-		for (String key : m.keySet()) {
-			if(func.mapp.containsKey(key)) {
-			int or = func.mapp.get(key);
-			int now = m.get(key);
-			int n = or+now;
-			func.mapp.put(key, n);
-		}
-	    else
-	    	func.mapp.put(key, m.get(key));
-	    }
-	}	
-	
-	//词频前十的单词（排序）
-	public static ArrayList<Map.Entry<String, Integer>> sortMap(){
-		//创建用与存储map当中内容的list
-		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(func.mapp.entrySet());
-		//构建比较器排序
-		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {
-=======
 	public static void addInMap(String[] s){
 		//将传入字符串数组先转换为map，再同原来的大map合并
 		//转换map
@@ -151,16 +97,11 @@ public class countF {
 		ArrayList<Map.Entry<String, Integer>> infoIds = new ArrayList<Map.Entry<String, Integer>>(func.mapp.entrySet());
 		//创建比较器
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      
 				return (o2.getValue() - o1.getValue()); 
 			}
 		}); 	
 		return infoIds;
 	}
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
+
 }

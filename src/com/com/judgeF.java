@@ -4,23 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class judgeF {
-<<<<<<< HEAD
-	/**
-	 * 关于判断的函数
-=======
-
 	/**
 	 * 有关判断的函数
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 	 * @param str
 	 * @return
 	 */
 	
-<<<<<<< HEAD
-	//是否为单词
-=======
 	//是否是单词
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 	public static boolean isWord(String str) {
 		if(str.length()<4)
 			return false;//字符数小于4
@@ -33,16 +23,10 @@ public class judgeF {
 			return false;//以数字开头不是
 		if(Character.isLowerCase(str.charAt(str.length()-1))||Character.isUpperCase(str.charAt(str.length()-1)))
 			return false;//以字母结尾不是
-<<<<<<< HEAD
-		for(int i=1;i<3;i++) {
-			if (Character.isLowerCase(str.charAt(i))||Character.isUpperCase(str.charAt(i)))
-				continue;
-=======
 		for(int i=1;i<3;i++){
 			if (Character.isLowerCase(str.charAt(i))||Character.isUpperCase(str.charAt(i))){
 			    continue;  
 			}
->>>>>>> 7712dfeacc0085280bb79b258259beb48b523aaf
 			else
 				return false;//至少前四位数都是字母
 		}
