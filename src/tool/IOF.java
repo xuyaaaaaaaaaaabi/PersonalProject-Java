@@ -54,7 +54,7 @@ public class IOF {
 	}
 	
 	//检测最后一行是否有换行
-	public static boolean hasEnterLasdtLine(){
+	public static boolean hasEnterLastLine(){
 		Path logPath = Paths.get(working_set.inPath);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         try {

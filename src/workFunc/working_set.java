@@ -34,7 +34,7 @@ public class working_set {
 			//文件读入
 			IOF.fileRead();
 			//最后一行是否有换行符或回车
-			if(IOF.hasEnterLasdtLine())
+			if(IOF.hasEnterLastLine())
 				numN++;
 			//重新统计char数量，将换行符也算入
 			sumC = countF.allCh(sumC, numN);
