@@ -35,7 +35,7 @@ public class basic {
 	//2.多余空白字符转换
 	public static String removeSpaces(String str){
 		str = str.replaceAll(" +", " ");
-		str = str.replaceAll("\t+","");
+		str = str.replaceAll("\t+"," ");
 		str = str.replaceAll("\0+","");
 		str = str.replaceAll("\b+","");
 		str = str.replaceAll("\f+","");
@@ -45,8 +45,10 @@ public class basic {
 	//3.空行
 	public static boolean haveEnter(String[] s){
 		if(!s[0].equals(""))
-			return false;
-		return true;
+			return true;
+		else if(s.length>1)
+			return true;
+		return false;
 	}
 	
 }
