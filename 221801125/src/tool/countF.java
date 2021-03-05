@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import workFunc.working_set;
+import basic.basic;
 
 public class countF {	
 	/**
@@ -33,7 +34,7 @@ public class countF {
 	//统计行数
 	public static void countR(String[] s1){
 		if(s1.length>0){
-			if(!s1[0].equals(""))
+			if(basic.haveEnter(s1))
 				working_set.sumR++;
 			working_set.numN++;
 		}
